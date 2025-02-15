@@ -1,35 +1,102 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import ProductCard from './components/ProductCard';
+import ShoppingCart from './components/Cart';
+import * as api from './services/api';
 
-function App() {
-  const [count, setCount] = useState(0)
 
-  return (
-    <>
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      productsList: [],
+      categories: [],
+      cart: [],
+    };
+  }
+
+  componentDidMount() {
+    api.getProducts(50).then((response) => this.setState({ productsList: response}))
+    api.getCategories()
+      .then((response) => this.setState({ categories: response }));
+  }
+
+  addCart = (product) => {
+    const { cart } = this.state;
+    const { id } = product;
+
+    const newCart = cart[id] ? {
+      ...cart,
+      [id]: {
+        ...cart[id],
+        quantity: cart[id].quantity + 1,
+      },
+    } : {
+      ...cart,
+      [id]: {
+        product,
+        quantity: 1,
+      },
+    };
+
+    this.setState({
+      cart: newCart,
+    });
+
+    localStorage.setItem('cart', JSON.stringify(newCart));
+  };
+
+  removeFromCart = (product) => {
+    const { id } = product;
+
+    const updatedCart = {
+      ...cart,
+      [id]: {
+        ...cart[id],
+        quantity: cart[id].quantity - 1,
+      },
+    }
+
+    this.setState({
+      cart: updatedCart,
+    });
+
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+  }
+
+  async fetchByCategory(categoryName) {
+    const fetchList = await api.getProductsFromCategory(categoryName);
+    this.setState({
+      productsList: fetchList.results,
+    });
+  }
+
+  render() {
+    const { productsList, categories, addItem } = this.state;
+    console.log({productsList})
+    
+    return (
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <h3>Produtos</h3>
+
+        {productsList?.length > 0 ? (
+          productsList.map((product) => (
+            <ProductCard
+              id={product.id}
+              title={product.title}
+              thumbnail={product.image}
+              price={product.price}
+              addCart={() => this.addCart(product)}
+              cart={this.state.cart}
+            />
+          ))
+        ) : (
+          <p>Nenhum produto foi encontrado</p>
+        )}
+
+        <ShoppingCart cart={this.state.cart} />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    );
+  }
 }
 
-export default App
+export default App;
