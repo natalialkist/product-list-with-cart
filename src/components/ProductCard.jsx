@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import CartBtn from './CartButton';
+import CartButtons from './CartButtons';
+import '../App.css'
 
 class ProductCard extends Component {
     constructor() {
@@ -8,20 +9,22 @@ class ProductCard extends Component {
     }
 
     render() {
-        const { id, title, thumbnail, price, addCart } = this.props;
+        const { product, addCart, cart, removeFromCart } = this.props;
 
         return (
-            <div>
-            <h2 data-testid="product-detail-name">{ title }</h2>
-            <img
-              data-testid="product-detail-image"
-              src={ thumbnail }
-              alt={ title }
-              style={{ width: '120px' }}
-            />
-            <h4 data-testid="product-detail-price">{ price }</h4>
-            <CartBtn addCart={addCart} />
-          </div>
+            <div key={product.id}>
+                <div style={{display: "flex", flexDirection: "column"}}>
+                    <img
+                    src={ product.image }
+                    alt={ product.title }
+                    style={{ width: '100%' }}
+                    />
+                    <CartButtons addCart={addCart} cart={cart} product={ product } removeFromCart={removeFromCart} />
+                </div>
+                <p>{ product.category }</p>
+                <h4 className='productTitle'>{ product.title }</h4>
+                <h4 data-testid="product-detail-price">${ product.price }</h4>
+            </div>
         )
     }
 }

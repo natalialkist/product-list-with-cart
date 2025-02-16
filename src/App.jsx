@@ -2,6 +2,7 @@ import React from 'react';
 import ProductCard from './components/ProductCard';
 import ShoppingCart from './components/Cart';
 import * as api from './services/api';
+import './App.css'
 
 
 class App extends React.Component {
@@ -10,7 +11,7 @@ class App extends React.Component {
     this.state = {
       productsList: [],
       categories: [],
-      cart: [],
+      cart: {},
     };
   }
 
@@ -46,6 +47,7 @@ class App extends React.Component {
   };
 
   removeFromCart = (product) => {
+    const { cart } = this.state;
     const { id } = product;
 
     const updatedCart = {
@@ -71,29 +73,34 @@ class App extends React.Component {
   }
 
   render() {
-    const { productsList, categories, addItem } = this.state;
-    console.log({productsList})
+    const { productsList } = this.state;
     
     return (
       <div>
         <h3>Produtos</h3>
 
-        {productsList?.length > 0 ? (
-          productsList.map((product) => (
-            <ProductCard
-              id={product.id}
-              title={product.title}
-              thumbnail={product.image}
-              price={product.price}
-              addCart={() => this.addCart(product)}
-              cart={this.state.cart}
-            />
-          ))
-        ) : (
-          <p>Nenhum produto foi encontrado</p>
-        )}
-
-        <ShoppingCart cart={this.state.cart} />
+        <div className='bodyWrapper'>
+          <div className='ProductsList'>
+          {productsList?.length > 0 ? (
+            productsList.map((product) => (
+              <div className='ProductCard'>
+                <ProductCard
+                  product={product}
+                  addCart={this.addCart}
+                  removeFromCart={this.removeFromCart}
+                  cart={this.state.cart}
+                />
+              </div>
+            ))
+          ) : (
+            <p>Nenhum produto foi encontrado</p>
+          )}
+          </div>
+          
+          <div>
+            <ShoppingCart cart={this.state.cart} />
+          </div>
+        </div>
       </div>
     );
   }
