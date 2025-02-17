@@ -17,13 +17,13 @@ class ProductCard extends Component {
                     <img
                     src={ product.image }
                     alt={ product.title }
-                    style={{ width: '100%' }}
+                    className={`productCardImage ${cart[product.id]?.quantity > 0 ? 'selected' : ''}`}
                     />
                     <CartButtons addCart={addCart} cart={cart} product={ product } removeFromCart={removeFromCart} />
                 </div>
                 <p>{ product.category }</p>
                 <h4 className='productTitle'>{ product.title }</h4>
-                <h4 data-testid="product-detail-price">${ product.price }</h4>
+                <h4>${ product.price.toFixed(2) }</h4>
             </div>
         )
     }

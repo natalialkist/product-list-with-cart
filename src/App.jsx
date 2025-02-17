@@ -58,6 +58,10 @@ class App extends React.Component {
       },
     }
 
+    if (updatedCart[id].quantity === 0) {
+      delete updatedCart[id];
+    }
+
     this.setState({
       cart: updatedCart,
     });
@@ -76,14 +80,14 @@ class App extends React.Component {
     const { productsList } = this.state;
     
     return (
-      <div>
-        <h3>Produtos</h3>
+      <div className='bodyWrapper'>
+        <h1>Produtos</h1>
 
-        <div className='bodyWrapper'>
+        <div className='productsWrapper'>
           <div className='ProductsList'>
           {productsList?.length > 0 ? (
             productsList.map((product) => (
-              <div className='ProductCard'>
+              <div className='productCard'>
                 <ProductCard
                   product={product}
                   addCart={this.addCart}
@@ -98,7 +102,7 @@ class App extends React.Component {
           </div>
           
           <div>
-            <ShoppingCart cart={this.state.cart} />
+            <ShoppingCart cart={this.state.cart} onCartChange={(updatedCart) => this.setState({ cart: updatedCart })} />
           </div>
         </div>
       </div>
