@@ -16,7 +16,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    api.getProducts(50).then((response) => this.setState({ productsList: response}))
+    api.getProducts(60).then((response) => this.setState({ productsList: response}))
     api.getCategories()
       .then((response) => this.setState({ categories: response }));
   }
@@ -101,7 +101,7 @@ class App extends React.Component {
           )}
           </div>
           
-          <div>
+          <div className='cartWrapper'>
             <ShoppingCart cart={this.state.cart} onCartChange={(updatedCart) => this.setState({ cart: updatedCart })} />
           </div>
         </div>

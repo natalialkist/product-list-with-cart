@@ -35,7 +35,7 @@ class ShoppingCart extends Component {
         return (
         <div className='cart'>
             <h2 style={{ color: '#c83b0e'}}>{`Your Cart (${this.state.quantity})`}</h2>
-            <div>
+            <div className='cartItemsWrapper'>
                 { Object.keys(cart).length > 0 ? (
                     <>
                         { Object.values(cart).map((item) => (
@@ -68,12 +68,12 @@ class ShoppingCart extends Component {
                             </div>
                         </div>
                     
-                        <div style={{ textAlign: 'center' }}>
+                        <div>
                             <button className='confirmOrderButton' onClick={() => this.setState({ isDialogOpen: true })}>Confirm Order</button>
                         </div>
                     </>
                 ) : (
-                    <div style={{ textAlign: 'center' }}>
+                    <div>
                         <img src={emptyCardImg} alt='Empty card' className='emptyCardImg' />
                         <p>Your added items will appear here</p>
                     </div>

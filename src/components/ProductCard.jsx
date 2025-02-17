@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import CartButtons from './CartButtons';
 import '../App.css'
@@ -12,8 +11,8 @@ class ProductCard extends Component {
         const { product, addCart, cart, removeFromCart } = this.props;
 
         return (
-            <div key={product.id}>
-                <div style={{display: "flex", flexDirection: "column"}}>
+            <div key={product.id} className='productCardWrapper'>
+                <div className='imageButtonsWrapper'>
                     <img
                     src={ product.image }
                     alt={ product.title }
@@ -21,9 +20,11 @@ class ProductCard extends Component {
                     />
                     <CartButtons addCart={addCart} cart={cart} product={ product } removeFromCart={removeFromCart} />
                 </div>
-                <p>{ product.category }</p>
-                <h4 className='productTitle'>{ product.title }</h4>
-                <h4>${ product.price.toFixed(2) }</h4>
+                <div className='cardInfoWrapper'>
+                    <p>{ product.category }</p>
+                    <h4 className='productTitle'>{ product.title }</h4>
+                    <h4>${ product.price.toFixed(2) }</h4>
+                </div>
             </div>
         )
     }

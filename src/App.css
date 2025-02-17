@@ -1,3 +1,22 @@
+:root {
+  --primary-color: #4caf50;
+  --secondary-color: #f8f8f8;
+  --border-radius: 8px;
+  --padding: 12px;
+  --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+h1, h4, p, span {
+ color: black;
+}
+
+
 @font-face {
   font-family: 'RedHatText';
   src: url('../assets/fonts/static/RedHatText-Regular.ttf') format('truetype');
@@ -15,7 +34,6 @@
 .bodyWrapper {
   background-color: #fcf8f5;
   font-family: 'RedHatText';
-  margin: 100px 150px;
   padding: 100px 150px;
 }
 
@@ -27,15 +45,29 @@
 .ProductsList {
   display: flex;
   flex-wrap: wrap;
-  gap: 40px;
-  max-width: 68%;
-  margin-right: 100px;
+  justify-content: center;
+  gap: 40px 20px;
+  margin-right: 50px;
+  max-width: 70%;
 }
 
 .productCard {
   box-sizing: border-box;
+  padding: 10px;
   flex: 1 1 calc(33.33% - 40px);
   max-width: calc(33.33% - 40px);
+}
+
+.productCardWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+}
+
+.imageButtonsWrapper {
+  display: flex;
+  flex-direction: column;
 }
 
 .productCardImage {
@@ -43,23 +75,31 @@
   height: 250px;
   object-fit: fill;
   border-radius: 15px;
+  padding: 15px;
 }
 
 .productTitle {
   white-space: nowrap;
-  overflow: hidden;
   text-overflow: ellipsis;
+  width: 100%;
+  overflow: hidden;
+}
+
+.cartWrapper {
+  display: flex;
+  width: 100%;
 }
 
 .cart {
-  position: fixed;
-  right: 12%;
-  top: 18%;
-  width: 20%;
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
+  height: fit-content;
+}
+.cartItemsWrapper {
+  min-width: 350px;
+  width: 20%;
 }
 
 .cartItem {
@@ -228,4 +268,50 @@
 .selected {
   border: 2px solid #c83b0e;
   border-radius: 15px;
+}
+
+@media (max-width: 375px) {
+  * {
+    padding: 0;
+  }
+  .bodyWrapper {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .ProductsList {
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px 60px;
+  }
+
+  .productsWrapper {
+    flex-direction: column;
+  }
+
+  .productCardWrapper {
+    width: 300px;
+  }
+  .cart {
+    z-index: 10;
+  }
+
+  .cart h2 {
+    font-size: 1rem;
+  }
+  .cart p {
+    font-size: 0.75rem;
+  }
+
+  .cart span {
+    font-size: 0.65rem;
+  }
+
+  .cart button {  
+    padding: 0 8px;
+  }
+
+  .cart button img {
+    width: 10px;
+  }
 }
