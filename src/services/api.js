@@ -1,5 +1,5 @@
-export async function getProducts(limit) {
-    const API_URL = `https://fakestoreapi.com/products?limit=${limit}`;
+export async function getAllProducts() {
+    const API_URL = 'https://fakestoreapi.com/products';
     return fetch(API_URL).then((response) => response.json());
 }
 

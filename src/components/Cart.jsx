@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import emptyCardImg from '../../assets/images/illustration-empty-cart.svg?url'
+import emptyCardImg from '../../assets/images/empty-cart-icon.png'
 import carbonNeutralIcon from '../../assets/images/icon-carbon-neutral.svg?url'
 import removeItemIcon from '../../assets/images/icon-remove-item.svg?url'
 import OrderConfirmationDialog from './OrderConfirmationDialog';
@@ -57,7 +57,7 @@ class ShoppingCart extends Component {
                                 </button>
                             </div>
                         ))}
-                        <div style={{ display: 'flex', justifyContent: 'space-between', margin: "20px 0" }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', margin: "20px 0", maxWidth: '85%' }}>
                             <span>Total</span>
                             <span style={{ fontWeight: '600', fontSize: '20px '}}>${this.state.total}</span>
                         </div>
@@ -68,12 +68,12 @@ class ShoppingCart extends Component {
                             </div>
                         </div>
                     
-                        <div>
+                        <div style={{ display: "flex", justifyContent: "center" }}>
                             <button className='confirmOrderButton' onClick={() => this.setState({ isDialogOpen: true })}>Confirm Order</button>
                         </div>
                     </>
                 ) : (
-                    <div>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%'}}>
                         <img src={emptyCardImg} alt='Empty card' className='emptyCardImg' />
                         <p>Your added items will appear here</p>
                     </div>

@@ -20,22 +20,26 @@ export default function OrderConfirmationDialog({ cart, cleanCart, isOpen, onClo
     return (
         <dialog ref={dialogRef} className="dialog">
             <div className="dialog-content">
-                <img src={orderConfirmedIcon} width='32' height='32' style={{ color: 'green'}} />
-                <h1>Order Confirmed</h1>
-                <p>We hope you enjoy your food!</p>
-                { Object.values(cart).map((item) => (
-                    <>
-                        <div key={ item.product.id } className="cartItem">
-                            <img src={item.image} alt={item.title} />
-                            <p>{ item.product.title }</p>
-                            <p>{ item.product.price }</p>
-                            <p>{ item.quantity }</p>
-                        </div>
-                    </>     
-                ))}
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <img src={orderConfirmedIcon} width='50' height='50' style={{ color: 'green'}} />
+                <h1 style={{ marginBottom: '30px', marginTop: '10px' }}>Order Confirmed</h1>
+                    { Object.values(cart).map((item) => (
+                        <div key={ item.product.id } className="order-item">
+                            <img src={item.product.image} alt={item.title} width='60' height='60' />
+                            <div style={{ display: 'flex', justifyContent: 'space-between', marginLeft: '10px', width: '85%'}}>
+                                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                    <p>{ item.product.title }</p>
+                                    <div style={{ display: 'flex' }}>
+                                        <p style={{ color: '#c83b0e', marginRight: '15px' }}>{ item.quantity }x</p>
+                                        <p>${ item.product.price }</p>
+                                    </div>
+                                </div>
+                                <p style={{ fontWeight: '600' }}>${(item.quantity * item.product.price).toFixed(2)}</p>
+                            </div>
+                        </div>  
+                    ))} 
+                <div className="order-total">
                     <p>Order Total</p>
-                    <p style={{ fontWeight: '600', fontSize: '20px '}}>${total}</p>
+                    <p>${total}</p>
                 </div>
                 <button className="confirm-button" onClick={() => {
                     cleanCart({})

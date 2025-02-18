@@ -16,7 +16,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    api.getProducts(60).then((response) => this.setState({ productsList: response}))
+    api.getAllProducts().then((response) => this.setState({ productsList: response}))
     api.getCategories()
       .then((response) => this.setState({ categories: response }));
   }
