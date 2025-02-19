@@ -1,0 +1,41 @@
+.productCardWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.cardInfoWrapper h4 {
+    font-size: 22px;
+    margin: 5px 0
+}
+
+.cardInfoWrapper h4:first-of-type {
+    color: #665c5b;
+}
+
+.cardInfoWrapper h4:last-of-type {
+    color: #c83b0e;
+}
+
+.cardInfoWrapper span {
+    color: #a29896;
+}
+
+.imageButtonsWrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.productCardImage {
+    aspect-ratio: 1 / 1;
+    border-radius: 15px;
+    object-fit: fill;
+    width: 100%;
+}
+
+.productTitle {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100%;
+    overflow: hidden;
+}

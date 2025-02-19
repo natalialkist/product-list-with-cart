@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 import orderConfirmedIcon from "../../assets/images/icon-order-confirmed.svg?url"
-import "../App.css"
+import "./OrderConfirmationDialog.css"
 
 export default function OrderConfirmationDialog({ cart, cleanCart, isOpen, onClose, total }) {
     const dialogRef = useRef(null);
@@ -19,29 +19,29 @@ export default function OrderConfirmationDialog({ cart, cleanCart, isOpen, onClo
 
     return (
         <dialog ref={dialogRef} className="dialog">
-            <div className="dialog-content">
-                <img src={orderConfirmedIcon} width='50' height='50' style={{ color: 'green'}} />
-                <h1 style={{ marginBottom: '30px', marginTop: '10px' }}>Order Confirmed</h1>
+            <div className="dialogContent">
+                <img src={orderConfirmedIcon} width='50' height='50' style={{ color: 'green' }} />
+                <h1>Order Confirmed</h1>
                     { Object.values(cart).map((item) => (
-                        <div key={ item.product.id } className="order-item">
+                        <div key={ item.product.id } className="orderItem">
                             <img src={item.product.image} alt={item.title} width='60' height='60' />
-                            <div style={{ display: 'flex', justifyContent: 'space-between', marginLeft: '10px', width: '85%'}}>
-                                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                            <div className="orderItemInfo">
+                                <div className="orderItemDescription">
                                     <p>{ item.product.title }</p>
                                     <div style={{ display: 'flex' }}>
-                                        <p style={{ color: '#c83b0e', marginRight: '15px' }}>{ item.quantity }x</p>
+                                        <p className="orderItemQuantity">{ item.quantity }x</p>
                                         <p>${ item.product.price }</p>
                                     </div>
                                 </div>
-                                <p style={{ fontWeight: '600' }}>${(item.quantity * item.product.price).toFixed(2)}</p>
+                                <p className="orderItemTotalPrice">${(item.quantity * item.product.price).toFixed(2)}</p>
                             </div>
                         </div>  
                     ))} 
-                <div className="order-total">
+                <div className="orderTotal">
                     <p>Order Total</p>
                     <p>${total}</p>
                 </div>
-                <button className="confirm-button" onClick={() => {
+                <button className="newOrderButton" onClick={() => {
                     cleanCart({})
                     dialogRef.current?.close(); onClose();
                 }}>

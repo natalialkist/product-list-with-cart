@@ -1,14 +1,14 @@
 export async function getAllProducts() {
     const API_URL = 'https://fakestoreapi.com/products';
-    return fetch(API_URL).then((response) => response.json());
-}
-
-export async function getCategories() {
-    const API_URL = 'https://fakestoreapi.com/products/categories';
-    return fetch(API_URL).then((response) => response.json());
+    try {
+      const response = await fetch(API_URL);
+      if (!response.ok) {
+        throw new Error('Error fetching products');
+      }
+      return await response.json();
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
 }
   
-export async function getProductsFromCategory(categoryName) {
-    const API_URL = `https://fakestoreapi.com/products/category/${categoryName}`;
-    return fetch(API_URL).then((response) => response.json());
-}

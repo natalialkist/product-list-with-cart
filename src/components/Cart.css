@@ -1,0 +1,150 @@
+.cart {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    height: fit-content;
+    margin-top: -85px;
+    min-width: 325px;
+    padding: 30px;
+    width: 100%;
+}
+
+.cart h2 {
+    color: #c83b0e;
+    margin-top: 0;
+}
+
+.cartItemsWrapper {
+    min-width: 325px;
+    width: 100%;
+}
+
+.cartItem {
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+}
+
+.cartItem button {
+    background-color: transparent;
+    border: 1px solid #ddd;
+    border-radius: 100%;
+    padding: 0 4px;
+}
+
+.cartItem button img {
+    height: 12px;
+    padding-top: 2px;
+    width: 12px;
+}
+
+.cartItemTitle {
+    color: #665c5b;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.cartItemQuantity {
+    color: #c83b0e;
+}
+
+.cartItemEachPrice {
+    color: #a29896;
+}
+
+.cartItemTotalPrice {
+    color: #665c5b;
+}
+
+.cartItemDetails {
+    display: flex;
+    justify-content: space-between;
+    width: 150px;
+}
+
+.orderTotalWrapper {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.orderTotalWrapper span:last-of-type {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.emptyCart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.emptyCartImg {
+    margin: 20px 0;
+    width: 50%;
+}
+
+.carbonNeutral {
+    align-items: center;
+    background-color: #fcf8f5;
+    border-radius: 5px;
+    display: flex;
+    height: 40px;
+    justify-content: center;
+    margin: 20px;
+    width: 80%;
+}
+
+.cartFooterItemsWrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.confirmOrderButton {
+    background-color: #c83b0e;
+    border-radius: 30px;
+    color: white;
+    margin-top: 10px;
+    width: 85%
+}
+  
+.confirmOrderButton:hover {
+    background-color: #952c0c;
+}
+
+@media (max-width: 412px) {
+    .cart {
+        z-index: 10;
+        margin: 5%;
+        width: 90%;
+        margin-top: 0 !important;
+      }
+    
+      .cart h2 {
+        font-size: 1rem;
+      }
+      .cart p {
+        font-size: 0.75rem;
+      }
+    
+      .cart span {
+        font-size: 0.65rem;
+      }
+    
+      .cartItem,
+      .orderTotalWrapper {
+        max-width: 85%;
+      }
+
+      .carbonNeutral,
+      .confirmOrderButtonWrapper {
+        margin-left: -8%;
+      }
+
+      .emptyCart {
+        width: 85%;
+      }
+}

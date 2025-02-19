@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import addCartIcon from  '../../assets/images/icon-add-to-cart.svg?url'
 import incrementQuantity from '../../assets/images/icon-increment-quantity.svg?url'
 import decrementQuantity from '../../assets/images/icon-decrement-quantity.svg?url'
-import "../App.css"
+import "./CartButtons.css"
 
 class CartButtons extends Component {
   render() {
     const { addCart, cart, product, removeFromCart } = this.props;
+
     return cart[product.id] && cart[product.id].quantity > 0 ? (
       <div className='cartButtonsWrapper' style={{ backgroundColor: "#c83b0e" }}>
         <div className='cartQntBtns' onClick={() => removeFromCart(product)}>

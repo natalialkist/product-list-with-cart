@@ -4,22 +4,31 @@ import ShoppingCart from './components/Cart';
 import * as api from './services/api';
 import './App.css'
 
-
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: true,
       productsList: [],
       categories: [],
       cart: {},
     };
   }
 
-  componentDidMount() {
-    api.getAllProducts().then((response) => this.setState({ productsList: response}))
-    api.getCategories()
-      .then((response) => this.setState({ categories: response }));
+  async componentDidMount() {
+    this.fetchProducts();
   }
+
+  fetchProducts = async () => {
+    try {
+      const response = await api.getAllProducts();
+      this.setState({ productsList: response, loading: false });
+    } catch (error) {
+      console.error("Erro ao buscar produtos:", error);
+      this.setState({ loading: false });
+    }
+  }
+  
 
   addCart = (product) => {
     const { cart } = this.state;
@@ -42,8 +51,6 @@ class App extends React.Component {
     this.setState({
       cart: newCart,
     });
-
-    localStorage.setItem('cart', JSON.stringify(newCart));
   };
 
   removeFromCart = (product) => {
@@ -65,8 +72,6 @@ class App extends React.Component {
     this.setState({
       cart: updatedCart,
     });
-
-    localStorage.setItem('cart', JSON.stringify(updatedCart));
   }
 
   async fetchByCategory(categoryName) {
@@ -81,11 +86,11 @@ class App extends React.Component {
     
     return (
       <div className='bodyWrapper'>
-        <h1>Produtos</h1>
+        <h1>Products</h1>
 
         <div className='productsWrapper'>
           <div className='ProductsList'>
-          {productsList?.length > 0 ? (
+          {!this.state.loading ? (
             productsList.map((product) => (
               <div className='productCard'>
                 <ProductCard
@@ -97,7 +102,9 @@ class App extends React.Component {
               </div>
             ))
           ) : (
-            <p>Nenhum produto foi encontrado</p>
+            <div className="loading-screen">
+              <div className="spinner"></div>
+            </div>
           )}
           </div>
           

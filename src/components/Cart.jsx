@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import emptyCardImg from '../../assets/images/empty-cart-icon.png'
+import emptyCartImg from '../../assets/images/empty-cart-icon.png'
 import carbonNeutralIcon from '../../assets/images/icon-carbon-neutral.svg?url'
 import removeItemIcon from '../../assets/images/icon-remove-item.svg?url'
 import OrderConfirmationDialog from './OrderConfirmationDialog';
-import "../App.css"
+import "./Cart.css"
 
 class ShoppingCart extends Component {
     state = {
@@ -34,47 +34,49 @@ class ShoppingCart extends Component {
 
         return (
         <div className='cart'>
-            <h2 style={{ color: '#c83b0e'}}>{`Your Cart (${this.state.quantity})`}</h2>
+            <h2>{`Your Cart (${this.state.quantity})`}</h2>
             <div className='cartItemsWrapper'>
                 { Object.keys(cart).length > 0 ? (
                     <>
                         { Object.values(cart).map((item) => (
                             <div key={ item.product.id } className="cartItem">
                                 <div style={{ display: "flex", flexDirection: "column" }}>
-                                    <span>{ item.product.title }</span>
-                                    <div style={{ display: "flex", justifyContent: "space-between", width: "150px" }}>
-                                        <span>{ item.quantity }x</span>
-                                        <span>${ item.product.price.toFixed(2) }</span>
-                                        <span>${(item.quantity * item.product.price).toFixed(2)}</span>
+                                    <span className='cartItemTitle'>{ item.product.title }</span>
+                                    <div className='cartItemDetails'>
+                                        <span className='cartItemQuantity'>{ item.quantity }x</span>
+                                        <span className='cartItemEachPrice'>${ item.product.price.toFixed(2) }</span>
+                                        <span className='cartItemTotalPrice'>${(item.quantity * item.product.price).toFixed(2)}</span>
                                     </div>
                                 </div>
-                                <button onClick={() => {
-                                    const updatedCart = { ...cart }
-                                    delete updatedCart[item.product.id];
-                                    onCartChange(updatedCart)
-                                }}>
+                                <button
+                                    onClick={() => {
+                                        const updatedCart = { ...cart }
+                                        delete updatedCart[item.product.id];
+                                        onCartChange(updatedCart)
+                                    }}
+                                >
                                     <img src={removeItemIcon} alt='Remove item icon' width='18' height='18' />
                                 </button>
                             </div>
                         ))}
-                        <div style={{ display: 'flex', justifyContent: 'space-between', margin: "20px 0", maxWidth: '85%' }}>
-                            <span>Total</span>
-                            <span style={{ fontWeight: '600', fontSize: '20px '}}>${this.state.total}</span>
+                        <div className='orderTotalWrapper'>
+                            <span>Order Total</span>
+                            <span>${this.state.total}</span>
                         </div>
-                        <div style={{ display: "flex", justifyContent: "center" }}>
-                            <div className="carbon-neutral">
+                        <div className='cartFooterItemsWrapper'>
+                            <div className="carbonNeutral">
                                 <img src={carbonNeutralIcon} alt="Carbon neutral icon" width="24" height="24" style={{ paddingRight: '5px'}} />
                                 <p>This is a <strong>carbon-neutral</strong> delivery</p>
                             </div>
                         </div>
                     
-                        <div style={{ display: "flex", justifyContent: "center" }}>
+                        <div className='cartFooterItemsWrapper'>
                             <button className='confirmOrderButton' onClick={() => this.setState({ isDialogOpen: true })}>Confirm Order</button>
                         </div>
                     </>
                 ) : (
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%'}}>
-                        <img src={emptyCardImg} alt='Empty card' className='emptyCardImg' />
+                    <div className='emptyCart'>
+                        <img src={emptyCartImg} alt='Empty cart' className='emptyCartImg' />
                         <p>Your added items will appear here</p>
                     </div>
                 )}

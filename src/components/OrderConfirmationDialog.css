@@ -1,0 +1,106 @@
+.dialog {
+    background-color: #fff;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    color: #333;
+    min-width: 300px;
+    padding: 35px;
+    width: 26%;
+}
+
+.dialogContent {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.dialogContent h1 {
+    margin-bottom: 30px;
+    margin-top: 10px;
+}
+
+.dialogContent p {
+    font-size: 16px;
+    margin: 0;
+    color: #666;
+}
+
+.orderItem {
+    align-items: center;
+    align-self: center;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    padding: 8px 15px;
+    width: 95%
+}
+
+.orderItem span {
+    font-size: 14px;
+    color: #333;
+}
+
+.orderItemInfo {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 10px;
+    width: 85%;
+}
+
+.orderItemDescription {
+    display: flex;
+    flex-direction: column;
+}
+
+.orderItemQuantity {
+    color: #c83b0e;
+    margin-right: 15px;
+}
+
+.orderItemTotalPrice {
+    padding-top: 12px;
+    font-weight: 600;
+}
+
+.orderTotal {
+    align-items: center;
+    align-self: center;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    width: 88%;
+}
+
+.orderTotal p:last-child {
+    color: #000;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.newOrderButton {
+    align-self: center;
+    background-color: #c83b0e;
+    border: none;
+    border-radius: 30px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 30px;
+    padding: 12px 24px;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.newOrderButton:hover {
+    background-color: #952c0c;
+}
+
+@media (max-width: 412px) {
+    .dialog {
+        width: 90%;
+    }
+
+    .dialogContent h1 {
+        font-size: 1.8em;
+    }
+}

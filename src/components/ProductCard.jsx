@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import CartButtons from './CartButtons';
-import '../App.css'
+import './ProductCard.css'
 
 class ProductCard extends Component {
     constructor() {
@@ -21,7 +21,7 @@ class ProductCard extends Component {
                     <CartButtons addCart={addCart} cart={cart} product={ product } removeFromCart={removeFromCart} />
                 </div>
                 <div className='cardInfoWrapper'>
-                    <p>{ product.category }</p>
+                    <span>{ product.category }</span>
                     <h4 className='productTitle'>{ product.title }</h4>
                     <h4>${ product.price.toFixed(2) }</h4>
                 </div>
